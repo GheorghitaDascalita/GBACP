@@ -1,0 +1,32 @@
+DESCRIPTION: Exemplu
+YEARS: 2
+PERIODS_PER_YEAR: 2
+NUM_COURSES: 6
+NUM_CURRICULA: 3
+MIN_MAX_COURSE_LOAD_PER_PERIOD: 0 2
+NUM_PRECEDENCES: 3
+NUM_UNDESIRED_PERIODS: 2
+
+COURSES:
+Curs1 5
+Curs2 10
+Curs3 5
+Curs4 4
+Curs5 20
+Curs6 7
+
+CURRICULA:
+Specializare1 4 Curs1 Curs2 Curs3 Curs4
+Specializare2 4 Curs2 Curs3 Curs4 Curs6
+Specializare3 4 Curs1 Curs2 Curs5 Curs6
+
+PRECEDENCES:
+Curs4 Curs3
+Curs4 Curs5
+Curs3 Curs6
+
+UNDESIRED_PERIODS:
+Curs2 0
+Curs1 1
+
+END.
