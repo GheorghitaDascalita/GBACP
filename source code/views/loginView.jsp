@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Autentificare</title>
-		<link href="<c:url value="/resources/css/login.css" />" rel="stylesheet" type="text/css">
+		<link href="resources/css/login.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<div>
@@ -21,5 +21,6 @@
 			</form>
 			<a href="${pageContext.request.contextPath}/register">Inregistreaza-te</a>
 		</div>
+                <script ></script>
 	</body>
 </html>

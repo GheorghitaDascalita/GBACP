@@ -6,7 +6,7 @@ body{
 	display:flex;
 	background-color: rgb(211, 233, 248);
 }
-body div{
+body > div{
   margin: 20px auto;
   width: 50%;
   border-radius: 10px;
@@ -27,17 +27,17 @@ input[type=text], [type=number]{
   box-sizing: border-box;
   background-color: rgb(240,240,240);
 }
-#send {
+#send, #send2 {
   width: 100%;
   background-color: rgb(31, 120, 184);
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 15px 0;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-#send:hover {
+#send:hover, #send2:hover {
   background-color: rgb(37, 143, 218);
 }
 h1{
@@ -57,7 +57,7 @@ a:hover {
 ul{
 	list-style-type: none;
 }
-button{
+.button{
   background-color: rgb(73, 138, 184);
   color: white;
   padding: 8px 12px;
@@ -66,13 +66,61 @@ button{
   border-radius: 4px;
   cursor: pointer;
 }
-button:hover{
+.button:hover{
   background-color: rgb(37, 143, 218);
 }
 .close{
-	padding: 10px;
-	font-size: 20px;
+    display: inline;
+    border: none;
+    background-color: transparent;
+    color: black;
+    padding: 10px;
+    font-size: 20px;
+}
+.close:hover{
+    padding: 10px;
+    color: red;
+    cursor: pointer;
 }
 #curricula ul{
 	list-style-type: none;
+}
+#preconditions li{
+    margin: 10px;
+}
+#sol > li > p{
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: grey;
+    padding: 5px;
+}
+#solDiv{
+    display: none;
+}
+#fileForm{
+    display: none;
+}
+#sFile{
+    color: grey;
+}
+#sFile:hover, #sForm:hover{
+    cursor: pointer;
+}
+form{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#noSol{
+    display: none;
+}
+i{
+    visibility: hidden;
+}
+#sol span{
+    background-color: rgb(237, 243, 248);
+}
+#sol ul ul li{
+    margin-top: 8px;
+    margin-bottom: 8px;
 }

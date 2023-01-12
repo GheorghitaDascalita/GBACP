@@ -1,4 +1,4 @@
-package fii.student.gbacp;
+package fii.student.gbacpapp;
 
 public class UserModel {
 
@@ -11,9 +11,9 @@ public class UserModel {
 	   }
 
 	   public UserModel(int id, String userName, String password) {
-		  this.id = id;
-	      this.username = userName;
-	      this.password = password;
+                this.id = id;
+                this.username = userName;
+                this.password = password;
 	   }
 	   
 	   public int getId() {

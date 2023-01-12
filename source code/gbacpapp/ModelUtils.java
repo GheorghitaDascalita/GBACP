@@ -1,13 +1,9 @@
-package fii.student.gbacp;
+package fii.student.gbacpapp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import fii.student.gbacp.UserModel;
 
 public class ModelUtils {
 
@@ -52,17 +48,6 @@ public class ModelUtils {
 	}
 	
 	return false;
-	}
-	
-	public static boolean insertCurriculum(Connection conn, String curriculumTitle, int id) throws SQLException {
-
-	String sql = "Insert into curricula(id, title, id_users) values (seq_courses.nextval, ?, ?)";
-	PreparedStatement pstm = conn.prepareStatement(sql);
-	pstm.setString(1, curriculumTitle);
-	pstm.setInt(2, id);
-	pstm.executeUpdate();
-	return true;
-	
 	}
 	
 }

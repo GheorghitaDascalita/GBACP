@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Inregistrare</title>
-		<link href="<c:url value="/resources/css/register.css" />" rel="stylesheet" type="text/css">
+		<link href="resources/css/register.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<div>

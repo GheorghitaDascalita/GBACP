@@ -1,4 +1,4 @@
-package fii.student.gbacp;
+package fii.student.gbacpapp;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -15,9 +15,10 @@ public class LogoutServlet extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath() + "/login");
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        request.getSession().invalidate();
+        response.sendRedirect(request.getContextPath() + "/login");
+    }
 
 }

@@ -1,4 +1,4 @@
-package fii.student.gbacp;
+package fii.student.gbacpapp;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
@@ -8,7 +8,7 @@ import org.chocosolver.solver.variables.BoolVar;
 import org.chocosolver.util.tools.ArrayUtils;
 
 public class GbacpSolver {
-	// prefP[i] = 1 <=> cursul i este atribuit unei perioade nepreferate
+    // prefP[i] = 1 <=> cursul i este atribuit unei perioade nepreferate
     private BoolVar[] prefP;
     
     // perioada asociata fiecarui curs
@@ -27,16 +27,16 @@ public class GbacpSolver {
     // cost total, al functiei obiectiv
     private IntVar ct;
     
-    Solver solver;
-    Model model;
+    private Solver solver;
+    private Model model;
 
 
-    public void creeazaSolver() {
+    public void createSolver() {
     	model = new Model("GBACP");
         solver = model.getSolver();
     }
 
-    public void construiesteModel(ProblemModel prob) {
+    public void buildModel(ProblemModel prob) {
     	int[] w = prob.getW();
     	int[][] sp = prob.getSp();
     	int[][] pref = prob.getPref();
@@ -56,8 +56,8 @@ public class GbacpSolver {
         for (int i = 0; i < prob.getM(); i++) {
             for (int j = 0; j < prob.getN(); j++) {
                 model.ifThenElse(x[i][j],
-					model.arithm(p[j], "=", i),
-					model.arithm(p[j], "!=", i)
+                    model.arithm(p[j], "=", i),
+                    model.arithm(p[j], "!=", i)
                 );
             }
         }
@@ -77,9 +77,8 @@ public class GbacpSolver {
         }
 
         // p[curs1] < p[curs2]
-        preconditie(3, 2);
-        preconditie(3, 4);
-        preconditie(2, 5);
+        for(int i = 0; i < prob.getnPrec(); i++)
+            precondition(prob.getPrec()[i][0], prob.getPrec()[i][1]);
         
         // Lm[s] = nr total mediu de credite, specializare s
         int[] Lm = new int[prob.getK()];
@@ -110,24 +109,30 @@ public class GbacpSolver {
         model.arithm(cs, "+", cp, "=", ct).post();
     }
 
-    private void preconditie(int curs1, int curs2) {
-        model.arithm(p[curs1], "<", p[curs2]).post();
+    private void precondition(int course1, int course2) {
+        model.arithm(p[course1], "<", p[course2]).post();
     }
 
-    public int[] rezolva(ProblemModel prob) {
+    public int[] solve(ProblemModel prob) {
     	// minimizarea costului total (variabilei obiectiv)
     	model.setObjective(Model.MINIMIZE, ct);
-    	Solution solutie = new Solution(model);
+        solver.limitTime("10s");
+        
+    	Solution solution = new Solution(model);
     	while (solver.solve()) {
-    	    solutie.record();
-    	}
-    	
-    	// se afiseaza p, pt solutia optima
-    	System.out.print("P: ");
-    	int[] solP = new int[prob.getN()+1];
-		for(int j = 0; j < prob.getN(); j++)
-			solP[j] = solutie.getIntVal(p[j]);
-		solP[prob.getN()] = solutie.getIntVal(ct);
-		return solP;
+    	    solution.record();
+    	}   	
+        if(solution.exists()){
+            // se trimite p, pt solutia optima
+            int[] solP = new int[prob.getN()+3];
+            for(int j = 0; j < prob.getN(); j++)
+                    solP[j] = solution.getIntVal(p[j]);
+            // se trimit costurile: dezechilibrului, preferintelor si total
+            solP[prob.getN()] = solution.getIntVal(cs);
+            solP[prob.getN()+1] = solution.getIntVal(cp);
+            solP[prob.getN()+2] = solution.getIntVal(ct);
+            return solP;
+        }
+        return new int[0];
     }
 }
